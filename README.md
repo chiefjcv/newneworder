@@ -102,3 +102,4 @@ A full-stack web application for managing orders in an optical shop with Kanban 
 - **comments** - Order comments
 - **order_history** - Change history tracking
 
+# AMillie
