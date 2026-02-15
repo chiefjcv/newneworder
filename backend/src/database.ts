@@ -5,7 +5,13 @@ import { fileURLToPath } from 'url';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const dbPath = path.join(__dirname, '../data/orders.db');
+//const dbPath = path.join(__dirname, '../data/orders.db');
+
+const dbPath =
+  process.env.NODE_ENV === 'production'
+    ? '/tmp/orders.db'
+    : path.join(__dirname, '../data/orders.db');
+
 
 let db: sqlite3.Database;
 
