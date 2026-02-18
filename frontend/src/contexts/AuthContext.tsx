@@ -33,6 +33,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    // For production deployments (Netlify/Vercel/etc), point the frontend at your hosted API:
+    // e.g. VITE_API_BASE_URL=https://your-backend.onrender.com
+    axios.defaults.baseURL = import.meta.env.VITE_API_BASE_URL || '';
+
     const storedToken = localStorage.getItem('token');
     const storedUser = localStorage.getItem('user');
 

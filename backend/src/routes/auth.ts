@@ -15,7 +15,7 @@ router.post('/register', async (req, res) => {
     }
 
     // Check if user exists
-    const existingUser = await dbGet('SELECT * FROM users WHERE email = ?', [email]);
+    const existingUser = await dbGet('SELECT * FROM users WHERE email = $1', [email]);
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
 
     // Create user
     const result = await dbRun(
-      'INSERT INTO users (email, password, name) VALUES (?, ?, ?)',
+      'INSERT INTO users (email, password, name) VALUES ($1, $2, $3) RETURNING id',
       [email, hashedPassword, name]
     );
 
@@ -61,7 +61,7 @@ router.post('/login', async (req, res) => {
     }
 
     // Find user
-    const user = await dbGet('SELECT * FROM users WHERE email = ?', [email]);
+    const user = await dbGet('SELECT * FROM users WHERE email = $1', [email]);
     if (!user) {
       return res.status(401).json({ error: 'Invalid credentials' });
     }

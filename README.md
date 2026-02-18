@@ -31,13 +31,14 @@ A full-stack web application for managing orders in an optical shop with Kanban 
 2. **Set up environment variables**:
    ```bash
    cd backend
-   cp .env.example .env
-   # Edit .env and set your JWT_SECRET
+   # Create a .env file and set:
+   # - JWT_SECRET (any long random string)
+   # - DATABASE_URL (your Supabase Postgres connection string)
    ```
 
 3. **Create data directory**:
    ```bash
-   mkdir -p backend/data
+   # (No longer needed when using Supabase/Postgres)
    ```
 
 4. **Start the development servers**:
@@ -48,6 +49,49 @@ A full-stack web application for managing orders in an optical shop with Kanban 
    This will start:
    - Backend server on http://localhost:5000
    - Frontend dev server on http://localhost:3000
+
+## Host Online for Free (Supabase + Render + Netlify)
+
+Free + reliable data storage requires a hosted database. Recommended setup:
+
+- **Database**: Supabase (Postgres) — free tier
+- **Backend**: Render Web Service — free domain `*.onrender.com`
+- **Frontend**: Netlify — free domain `*.netlify.app`
+
+### 1) Create a Supabase project
+
+1. Create a project in Supabase
+2. Go to **Project Settings → Database → Connection string**
+3. Copy the **Transaction pooler** connection string (recommended)
+
+You’ll use this as `DATABASE_URL` on Render (keep it secret).
+
+### 2) Deploy backend to Render
+
+1. Push this repo to GitHub
+2. In Render: **New → Web Service → Connect repo**
+3. Configure:
+   - **Root Directory**: `backend`
+   - **Build Command**: `npm ci && npm run build`
+   - **Start Command**: `npm start`
+4. Environment variables:
+   - **`DATABASE_URL`**: Supabase connection string
+   - **`JWT_SECRET`**: long random string
+   - **`DATABASE_SSL`**: `true`
+
+Render will give you a URL like `https://your-service.onrender.com`.
+
+### 3) Deploy frontend to Netlify
+
+1. In Netlify: **Add new site → Import from Git**
+2. Configure:
+   - **Base directory**: `frontend`
+   - **Build command**: `npm ci && npm run build`
+   - **Publish directory**: `dist`
+3. Environment variable:
+   - **`VITE_API_BASE_URL`**: your Render backend URL (example: `https://your-service.onrender.com`)
+
+Netlify will give you a URL like `https://your-site.netlify.app`.
 
 ## Usage
 
@@ -71,7 +115,7 @@ A full-stack web application for managing orders in an optical shop with Kanban 
 │   │   └── routes/
 │   │       ├── auth.ts       # Authentication routes
 │   │       └── orders.ts     # Order CRUD routes
-│   └── data/                 # SQLite database location
+│   └── data/                 # (legacy) SQLite database location
 ├── frontend/
 │   ├── src/
 │   │   ├── components/       # React components
