@@ -1,4 +1,5 @@
 import pg from 'pg';
+import dns from 'dns';
 
 const { Pool } = pg;
 
@@ -16,8 +17,23 @@ export const initDatabase = async () => {
     throw new Error('DATABASE_URL is required (use your Supabase Postgres connection string).');
   }
 
+  // Parse connection string so we can force IPv4 (helps on hosts without IPv6 routes).
+  const url = new URL(databaseUrl);
+  const host = url.hostname;
+  const port = url.port ? Number(url.port) : 5432;
+  const database = url.pathname.replace(/^\//, '') || 'postgres';
+  const user = decodeURIComponent(url.username);
+  const password = decodeURIComponent(url.password);
+
+  // Resolve to IPv4 address explicitly to avoid ENETUNREACH on IPv6-only resolutions.
+  const { address } = await dns.promises.lookup(host, { family: 4 });
+
   pool = new Pool({
-    connectionString: databaseUrl,
+    host: address,
+    port,
+    database,
+    user,
+    password,
     ssl: shouldUseSsl(databaseUrl) ? { rejectUnauthorized: false } : undefined
   });
 
