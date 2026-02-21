@@ -6,6 +6,22 @@ import OrderCard from '../components/OrderCard';
 import CreateOrderModal from '../components/CreateOrderModal';
 import { differenceInDays, parseISO } from 'date-fns';
 
+export interface OrderHistoryItem {
+  id: number;
+  field_name: string;
+  old_value: string | null;
+  new_value: string | null;
+  user_name: string;
+  created_at: string;
+}
+
+export interface OrderComment {
+  id: number;
+  comment: string;
+  user_name: string;
+  created_at: string;
+}
+
 export interface Order {
   id: number;
   patient_name: string;
@@ -14,7 +30,8 @@ export interface Order {
   date_created: string;
   due_date: string;
   created_by_name?: string;
-  comments?: Comment[];
+  comments?: OrderComment[];
+  history?: OrderHistoryItem[];
 }
 
 const STATUSES = ['Open', 'Order Placed', 'In Progress', 'Ready for Pickup', 'Delivered'];

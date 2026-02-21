@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { useAuth } from '../contexts/AuthContext';
 import { Order } from './KanbanBoard';
 
-interface Comment {
+interface OrderComment {
   id: number;
   comment: string;
   user_name: string;
@@ -24,7 +24,7 @@ interface HistoryItem {
 const OrderDetail = () => {
   const { id } = useParams<{ id: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  useAuth();
   const [order, setOrder] = useState<Order | null>(null);
   const [loading, setLoading] = useState(true);
   const [comment, setComment] = useState('');
@@ -264,15 +264,15 @@ const OrderDetail = () => {
             </form>
             <div className="space-y-3 max-h-96 overflow-y-auto">
               {order.comments && order.comments.length > 0 ? (
-                order.comments.map((comment: Comment) => (
-                  <div key={comment.id} className="border-b border-gray-200 pb-3">
+                order.comments.map((c: OrderComment) => (
+                  <div key={c.id} className="border-b border-gray-200 pb-3">
                     <div className="flex justify-between items-start mb-1">
-                      <span className="font-medium text-gray-900">{comment.user_name}</span>
+                      <span className="font-medium text-gray-900">{c.user_name}</span>
                       <span className="text-xs text-gray-500">
-                        {format(new Date(comment.created_at), 'MMM dd, yyyy HH:mm')}
+                        {format(new Date(c.created_at), 'MMM dd, yyyy HH:mm')}
                       </span>
                     </div>
-                    <p className="text-gray-700 text-sm">{comment.comment}</p>
+                    <p className="text-gray-700 text-sm">{c.comment}</p>
                   </div>
                 ))
               ) : (
