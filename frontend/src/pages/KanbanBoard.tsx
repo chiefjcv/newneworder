@@ -22,11 +22,15 @@ export interface OrderComment {
   created_at: string;
 }
 
+export const ORDER_TYPES = ['Stock', 'Purchase', 'Special'] as const;
+export type OrderType = (typeof ORDER_TYPES)[number];
+
 export interface Order {
   id: number;
   patient_name: string;
   patient_rx: string;
   status: string;
+  order_type?: string;
   date_created: string;
   due_date: string;
   created_by_name?: string;

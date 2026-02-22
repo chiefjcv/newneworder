@@ -34,7 +34,8 @@ const OrderDetail = () => {
     patient_name: '',
     patient_rx: '',
     due_date: '',
-    status: 'Open'
+    status: 'Open',
+    order_type: 'Stock'
   });
 
   useEffect(() => {
@@ -49,7 +50,8 @@ const OrderDetail = () => {
         patient_name: response.data.patient_name,
         patient_rx: response.data.patient_rx || '',
         due_date: response.data.due_date.split('T')[0],
-        status: response.data.status
+        status: response.data.status,
+        order_type: response.data.order_type ?? 'Stock'
       });
     } catch (error) {
       console.error('Error fetching order:', error);
@@ -157,6 +159,20 @@ const OrderDetail = () => {
                   className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 />
               </div>
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-1">
+                  Order Type
+                </label>
+                <select
+                  value={formData.order_type}
+                  onChange={(e) => setFormData({ ...formData, order_type: e.target.value })}
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option value="Stock">Stock</option>
+                  <option value="Purchase">Purchase</option>
+                  <option value="Special">Special</option>
+                </select>
+              </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>
                   <label className="block text-sm font-medium text-gray-700 mb-1">
@@ -202,7 +218,8 @@ const OrderDetail = () => {
                       patient_name: order.patient_name,
                       patient_rx: order.patient_rx || '',
                       due_date: order.due_date.split('T')[0],
-                      status: order.status
+                      status: order.status,
+                      order_type: order.order_type ?? 'Stock'
                     });
                   }}
                   className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md hover:bg-gray-300"
@@ -222,6 +239,10 @@ const OrderDetail = () => {
                 <p className="text-gray-900 whitespace-pre-wrap">{order.patient_rx || 'N/A'}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <span className="text-sm font-medium text-gray-500">Order Type:</span>
+                  <p className="text-lg text-gray-900">{order.order_type ?? 'Stock'}</p>
+                </div>
                 <div>
                   <span className="text-sm font-medium text-gray-500">Status:</span>
                   <p className="text-lg text-gray-900">{order.status}</p>

@@ -86,20 +86,23 @@ router.get('/:id', async (req: AuthRequest, res) => {
   }
 });
 
+const ORDER_TYPES = ['Stock', 'Purchase', 'Special'];
+
 // Create order
 router.post('/', async (req: AuthRequest, res) => {
   try {
-    const { patient_name, patient_rx, due_date, status } = req.body;
+    const { patient_name, patient_rx, due_date, status, order_type } = req.body;
+    const type = order_type && ORDER_TYPES.includes(order_type) ? order_type : 'Stock';
 
     if (!patient_name || !due_date) {
       return res.status(400).json({ error: 'Patient name and due date are required' });
     }
 
     const result = await dbRun(
-      `INSERT INTO orders (patient_name, patient_rx, due_date, status, created_by)
-       VALUES ($1, $2, $3, $4, $5)
+      `INSERT INTO orders (patient_name, patient_rx, due_date, status, order_type, created_by)
+       VALUES ($1, $2, $3, $4, $5, $6)
        RETURNING id`,
-      [patient_name, patient_rx || '', due_date, status || 'Open', req.userId]
+      [patient_name, patient_rx || '', due_date, status || 'Open', type, req.userId]
     );
 
     // Log creation in history
@@ -120,7 +123,7 @@ router.post('/', async (req: AuthRequest, res) => {
 // Update order
 router.put('/:id', async (req: AuthRequest, res) => {
   try {
-    const { patient_name, patient_rx, due_date, status } = req.body;
+    const { patient_name, patient_rx, due_date, status, order_type } = req.body;
     const orderId = req.params.id;
 
     // Get current order
@@ -129,16 +132,22 @@ router.put('/:id', async (req: AuthRequest, res) => {
       return res.status(404).json({ error: 'Order not found' });
     }
 
+    const newOrderType =
+      order_type !== undefined && ORDER_TYPES.includes(order_type)
+        ? order_type
+        : (currentOrder.order_type ?? 'Stock');
+
     // Update order
     await dbRun(
       `UPDATE orders 
-       SET patient_name = $1, patient_rx = $2, due_date = $3, status = $4
-       WHERE id = $5`,
+       SET patient_name = $1, patient_rx = $2, due_date = $3, status = $4, order_type = $5
+       WHERE id = $6`,
       [
         patient_name || currentOrder.patient_name,
         patient_rx !== undefined ? patient_rx : currentOrder.patient_rx,
         due_date || currentOrder.due_date,
         status !== undefined ? status : currentOrder.status,
+        newOrderType,
         orderId
       ]
     );
@@ -165,6 +174,14 @@ router.put('/:id', async (req: AuthRequest, res) => {
         `INSERT INTO order_history (order_id, user_id, field_name, old_value, new_value)
          VALUES ($1, $2, $3, $4, $5)`,
         [orderId, req.userId, 'due_date', currentOrder.due_date, due_date]
+      );
+    }
+
+    if (newOrderType !== (currentOrder.order_type ?? 'Stock')) {
+      await dbRun(
+        `INSERT INTO order_history (order_id, user_id, field_name, old_value, new_value)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [orderId, req.userId, 'order_type', currentOrder.order_type ?? 'Stock', newOrderType]
       );
     }
 

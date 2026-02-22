@@ -26,13 +26,16 @@ const OrderCard = ({ order, isDueSoon, onStatusChange, onDelete, onClick }: Orde
       }`}
       onClick={onClick}
     >
-      {isDueSoon && (
-        <div className="mb-2">
+      <div className="flex flex-wrap gap-1 mb-2">
+        <span className="bg-gray-200 text-gray-700 text-xs font-medium px-2 py-0.5 rounded">
+          {order.order_type ?? 'Stock'}
+        </span>
+        {isDueSoon && (
           <span className="bg-red-500 text-white text-xs font-semibold px-2 py-1 rounded">
             Due Soon
           </span>
-        </div>
-      )}
+        )}
+      </div>
       <h3 className="font-semibold text-gray-900 mb-2">{order.patient_name}</h3>
       <div className="text-sm text-gray-600 space-y-1 mb-3">
         <p>

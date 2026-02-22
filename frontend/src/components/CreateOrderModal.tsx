@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
+import { ORDER_TYPES } from '../pages/KanbanBoard';
 
 interface CreateOrderModalProps {
   onClose: () => void;
@@ -11,6 +12,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
   const [patientRx, setPatientRx] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [status, setStatus] = useState('Open');
+  const [orderType, setOrderType] = useState('Stock');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
@@ -24,7 +26,8 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
         patient_name: patientName,
         patient_rx: patientRx,
         due_date: dueDate,
-        status
+        status,
+        order_type: orderType
       });
       onSuccess();
     } catch (err: any) {
@@ -79,6 +82,22 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
+          </div>
+
+          <div>
+            <label htmlFor="orderType" className="block text-sm font-medium text-gray-700 mb-1">
+              Order Type
+            </label>
+            <select
+              id="orderType"
+              value={orderType}
+              onChange={(e) => setOrderType(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            >
+              {ORDER_TYPES.map((t) => (
+                <option key={t} value={t}>{t}</option>
+              ))}
+            </select>
           </div>
 
           <div>
