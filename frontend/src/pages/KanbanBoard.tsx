@@ -38,7 +38,7 @@ export interface Order {
   history?: OrderHistoryItem[];
 }
 
-const STATUSES = ['Open', 'Order Placed', 'In Progress', 'Ready for Pickup', 'Delivered'];
+export const STATUSES = ['Open', 'Order Placed', 'In Progress', 'Ready for Pickup', 'Delivered'];
 
 const KanbanBoard = () => {
   const [orders, setOrders] = useState<Order[]>([]);
@@ -107,6 +107,12 @@ const KanbanBoard = () => {
             <h1 className="text-2xl font-bold text-gray-900">Order Management</h1>
             <div className="flex items-center gap-4 flex-wrap">
               <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
+              <button
+                onClick={() => navigate('/orders')}
+                className="text-sm text-indigo-600 hover:text-indigo-800 border border-indigo-200 px-3 py-1 rounded-md"
+              >
+                List View
+              </button>
               <button
                 onClick={() => setShowCreateModal(true)}
                 className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors"

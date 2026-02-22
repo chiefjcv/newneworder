@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import KanbanBoard from './pages/KanbanBoard';
 import OrderDetail from './pages/OrderDetail';
+import OrderList from './pages/OrderList';
 
 const PrivateRoute = ({ children }: { children: React.ReactNode }) => {
   const { user } = useAuth();
@@ -30,6 +31,14 @@ function App() {
             element={
               <PrivateRoute>
                 <OrderDetail />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/orders"
+            element={
+              <PrivateRoute>
+                <OrderList />
               </PrivateRoute>
             }
           />
