@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
+import html2pdf from 'html2pdf.js';
 import { useAuth } from '../contexts/AuthContext';
 import { Order } from './KanbanBoard';
 
@@ -30,6 +31,7 @@ const OrderDetail = () => {
   const [comment, setComment] = useState('');
   const [submittingComment, setSubmittingComment] = useState(false);
   const [editing, setEditing] = useState(false);
+  const orderInfoRef = useRef<HTMLDivElement>(null);
   const [formData, setFormData] = useState({
     patient_name: '',
     due_date: '',
@@ -109,6 +111,21 @@ const OrderDetail = () => {
     }
   };
 
+  const downloadPDF = () => {
+    if (!orderInfoRef.current || !order) return;
+
+    const element = orderInfoRef.current;
+    const opt = {
+      margin: 10,
+      filename: `Order-${order.id}-${order.patient_name}.pdf`,
+      image: { type: 'jpeg', quality: 0.98 },
+      html2canvas: { scale: 2 },
+      jsPDF: { orientation: 'portrait', unit: 'mm', format: 'a4' }
+    };
+
+    html2pdf().set(opt).from(element).save();
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -143,17 +160,28 @@ const OrderDetail = () => {
       </header>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div ref={orderInfoRef} className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-start mb-4">
             <h2 className="text-xl font-bold text-gray-900">Order Information</h2>
-            {!editing && (
-              <button
-                onClick={() => setEditing(true)}
-                className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
-              >
-                Edit
-              </button>
-            )}
+            <div className="flex gap-2">
+              {!editing && (
+                <>
+                  <button
+                    onClick={downloadPDF}
+                    className="text-green-600 hover:text-green-800 text-sm font-medium flex items-center gap-1"
+                    title="Download as PDF"
+                  >
+                    📄 PDF
+                  </button>
+                  <button
+                    onClick={() => setEditing(true)}
+                    className="text-indigo-600 hover:text-indigo-800 text-sm font-medium"
+                  >
+                    Edit
+                  </button>
+                </>
+              )}
+            </div>
           </div>
 
           {editing ? (
