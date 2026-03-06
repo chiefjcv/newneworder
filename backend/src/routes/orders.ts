@@ -122,7 +122,7 @@ router.post('/', async (req: AuthRequest, res) => {
         sph_od, cyl_od, axis_od, add_od, va_od, prism_bases_od,
         sph_os, cyl_os, axis_os, add_os, va_os, prism_bases_os
        )
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
        RETURNING id`,
       [
         patient_name, 
