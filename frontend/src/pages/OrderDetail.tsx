@@ -119,10 +119,10 @@ const OrderDetail = () => {
 
     const element = orderInfoRef.current;
     const opt = {
-      margin: 10,
+      margin: 5,
       filename: `${order.patient_name}-Order-${order.id}.pdf`,
       image: { type: 'png' as const, quality: 0.98 },
-      html2canvas: { scale: 2 },
+      html2canvas: { scale: 1.5 },
       jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a5' as const }
     };
 
