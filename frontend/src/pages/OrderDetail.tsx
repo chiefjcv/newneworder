@@ -119,10 +119,10 @@ const OrderDetail = () => {
 
     const element = orderInfoRef.current;
     const opt = {
-      margin: 1,
+      margin: 3,
       filename: `${order.patient_name}-Order-${order.id}.pdf`,
-      image: { type: 'png' as const, quality: 0.9 },
-      html2canvas: { scale: 0.8 },
+      image: { type: 'png' as const, quality: 0.98 },
+      html2canvas: { scale: 1.2 },
       jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a5' as const }
     };
 
@@ -250,36 +250,36 @@ const OrderDetail = () => {
 
               <div className="border-t border-gray-300 pt-1">
                 <h3 className="text-sm font-semibold text-gray-900 mb-1">Prescription</h3>
-                <table className="w-full border-collapse border border-gray-300">
+                <table className="w-full border-collapse border border-gray-300 text-xs">
                   <thead className="bg-gray-100">
                     <tr>
-                      <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Eye</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Sph</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Cyl</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Axis</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Add.</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">VA</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Prism. Bases</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">Eye</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Sph</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Cyl</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Axis</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Add.</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">VA</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Prism. Bases</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-300 px-4 py-2 font-semibold bg-gray-50">OD</td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.sph_od ?? ''} onChange={(e) => setFormData({ ...formData, sph_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.cyl_od ?? ''} onChange={(e) => setFormData({ ...formData, cyl_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" min="0" max="180" value={formData.axis_od ?? ''} onChange={(e) => setFormData({ ...formData, axis_od: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.add_od ?? ''} onChange={(e) => setFormData({ ...formData, add_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="text" value={formData.va_od} onChange={(e) => setFormData({ ...formData, va_od: e.target.value })} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="text" value={formData.prism_bases_od} onChange={(e) => setFormData({ ...formData, prism_bases_od: e.target.value })} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-2 py-1 font-semibold bg-gray-50">OD</td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_od ?? ''} onChange={(e) => setFormData({ ...formData, sph_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_od ?? ''} onChange={(e) => setFormData({ ...formData, cyl_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_od ?? ''} onChange={(e) => setFormData({ ...formData, axis_od: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_od ?? ''} onChange={(e) => setFormData({ ...formData, add_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_od} onChange={(e) => setFormData({ ...formData, va_od: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_od} onChange={(e) => setFormData({ ...formData, prism_bases_od: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 px-4 py-2 font-semibold bg-gray-50">OS</td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.sph_os ?? ''} onChange={(e) => setFormData({ ...formData, sph_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.cyl_os ?? ''} onChange={(e) => setFormData({ ...formData, cyl_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" min="0" max="180" value={formData.axis_os ?? ''} onChange={(e) => setFormData({ ...formData, axis_os: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="number" step="0.01" value={formData.add_os ?? ''} onChange={(e) => setFormData({ ...formData, add_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="text" value={formData.va_os} onChange={(e) => setFormData({ ...formData, va_os: e.target.value })} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-2 py-1"><input type="text" value={formData.prism_bases_os} onChange={(e) => setFormData({ ...formData, prism_bases_os: e.target.value })} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-2 py-1 font-semibold bg-gray-50">OS</td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_os ?? ''} onChange={(e) => setFormData({ ...formData, sph_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_os ?? ''} onChange={(e) => setFormData({ ...formData, cyl_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_os ?? ''} onChange={(e) => setFormData({ ...formData, axis_os: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_os ?? ''} onChange={(e) => setFormData({ ...formData, add_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_os} onChange={(e) => setFormData({ ...formData, va_os: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_os} onChange={(e) => setFormData({ ...formData, prism_bases_os: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
                     </tr>
                   </tbody>
                 </table>
@@ -349,38 +349,38 @@ const OrderDetail = () => {
                 </p>
               </div>
 
-              <div className="border-t border-gray-300 pt-4 mt-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Prescription</h3>
-                <table className="w-full border-collapse border border-gray-300">
+              <div className="border-t border-gray-300 pt-1 mt-2">
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">Prescription</h3>
+                <table className="w-full border-collapse border border-gray-300 text-xs">
                   <thead className="bg-gray-100">
                     <tr>
-                      <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Eye</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Sph</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Cyl</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Axis</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Add.</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">VA</th>
-                      <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Prism. Bases</th>
+                      <th className="border border-gray-300 px-2 py-1 text-left font-semibold">Eye</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Sph</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Cyl</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Axis</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Add.</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">VA</th>
+                      <th className="border border-gray-300 px-2 py-1 text-center font-semibold">Prism. Bases</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td className="border border-gray-300 px-4 py-2 font-semibold">OD</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.sph_od ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.cyl_od ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.axis_od ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.add_od ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.va_od ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.prism_bases_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 font-semibold">OD</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.sph_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.cyl_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.axis_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.add_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.va_od ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.prism_bases_od ?? '—'}</td>
                     </tr>
                     <tr>
-                      <td className="border border-gray-300 px-4 py-2 font-semibold">OS</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.sph_os ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.cyl_os ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.axis_os ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.add_os ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.va_os ?? '—'}</td>
-                      <td className="border border-gray-300 px-4 py-2 text-center">{order.prism_bases_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 font-semibold">OS</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.sph_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.cyl_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.axis_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.add_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.va_os ?? '—'}</td>
+                      <td className="border border-gray-300 px-2 py-1 text-center">{order.prism_bases_os ?? '—'}</td>
                     </tr>
                   </tbody>
                 </table>
