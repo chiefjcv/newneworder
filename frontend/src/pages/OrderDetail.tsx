@@ -119,10 +119,10 @@ const OrderDetail = () => {
 
     const element = orderInfoRef.current;
     const opt = {
-      margin: 2,
+      margin: 1,
       filename: `${order.patient_name}-Order-${order.id}.pdf`,
-      image: { type: 'png' as const, quality: 0.95 },
-      html2canvas: { scale: 1 },
+      image: { type: 'png' as const, quality: 0.9 },
+      html2canvas: { scale: 0.8 },
       jsPDF: { orientation: 'landscape' as const, unit: 'mm' as const, format: 'a5' as const }
     };
 
@@ -164,7 +164,7 @@ const OrderDetail = () => {
       </header>
 
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div ref={orderInfoRef} className="bg-white rounded-lg shadow-md p-6 mb-6">
+        <div className="bg-white rounded-lg shadow-md p-6 mb-6">
           <div className="flex justify-between items-start mb-4">
             <h2 className="text-xl font-bold text-gray-900">Order Information</h2>
             <div className="flex gap-2">
@@ -188,8 +188,9 @@ const OrderDetail = () => {
             </div>
           </div>
 
+          <div ref={orderInfoRef} className="space-y-2 text-sm">
           {editing ? (
-            <form onSubmit={handleUpdateOrder} className="space-y-4">
+            <form onSubmit={handleUpdateOrder} className="space-y-1">
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Patient Name
@@ -198,7 +199,7 @@ const OrderDetail = () => {
                   type="text"
                   value={formData.patient_name}
                   onChange={(e) => setFormData({ ...formData, patient_name: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
                   required
                 />
               </div>
@@ -247,8 +248,8 @@ const OrderDetail = () => {
                 </div>
               </div>
 
-              <div className="border-t border-gray-300 pt-4">
-                <h3 className="text-lg font-semibold text-gray-900 mb-4">Prescription</h3>
+              <div className="border-t border-gray-300 pt-1">
+                <h3 className="text-sm font-semibold text-gray-900 mb-1">Prescription</h3>
                 <table className="w-full border-collapse border border-gray-300">
                   <thead className="bg-gray-100">
                     <tr>
@@ -386,6 +387,7 @@ const OrderDetail = () => {
               </div>
             </div>
           )}
+          </div>
         </div>
 
         <div className="grid md:grid-cols-2 gap-6">
