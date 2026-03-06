@@ -28,7 +28,6 @@ export type OrderType = (typeof ORDER_TYPES)[number];
 export interface Order {
   id: number;
   patient_name: string;
-  patient_rx: string;
   status: string;
   order_type?: string;
   date_created: string;

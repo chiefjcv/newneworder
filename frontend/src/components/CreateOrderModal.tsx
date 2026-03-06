@@ -9,7 +9,6 @@ interface CreateOrderModalProps {
 
 const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
   const [patientName, setPatientName] = useState('');
-  const [patientRx, setPatientRx] = useState('');
   const [dueDate, setDueDate] = useState('');
   const [status, setStatus] = useState('Open');
   const [orderType, setOrderType] = useState('Stock');
@@ -40,7 +39,6 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
     try {
       await axios.post('/api/orders', {
         patient_name: patientName,
-        patient_rx: patientRx,
         due_date: dueDate,
         status,
         order_type: orderType,
@@ -95,19 +93,6 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="patientRx" className="block text-sm font-medium text-gray-700 mb-1">
-              Patient RX
-            </label>
-            <textarea
-              id="patientRx"
-              value={patientRx}
-              onChange={(e) => setPatientRx(e.target.value)}
-              rows={3}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
             />
           </div>

@@ -32,7 +32,6 @@ const OrderDetail = () => {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     patient_name: '',
-    patient_rx: '',
     due_date: '',
     status: 'Open',
     order_type: 'Stock',
@@ -60,7 +59,6 @@ const OrderDetail = () => {
       setOrder(response.data);
       setFormData({
         patient_name: response.data.patient_name,
-        patient_rx: response.data.patient_rx || '',
         due_date: response.data.due_date.split('T')[0],
         status: response.data.status,
         order_type: response.data.order_type ?? 'Stock',
@@ -174,17 +172,6 @@ const OrderDetail = () => {
               </div>
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Patient RX
-                </label>
-                <textarea
-                  value={formData.patient_rx}
-                  onChange={(e) => setFormData({ ...formData, patient_rx: e.target.value })}
-                  rows={4}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-1">
                   Order Type
                 </label>
                 <select
@@ -277,7 +264,6 @@ const OrderDetail = () => {
                     setEditing(false);
                     setFormData({
                       patient_name: order.patient_name,
-                      patient_rx: order.patient_rx || '',
                       due_date: order.due_date.split('T')[0],
                       status: order.status,
                       order_type: order.order_type ?? 'Stock',
@@ -306,10 +292,6 @@ const OrderDetail = () => {
               <div>
                 <span className="text-sm font-medium text-gray-500">Patient Name:</span>
                 <p className="text-lg text-gray-900">{order.patient_name}</p>
-              </div>
-              <div>
-                <span className="text-sm font-medium text-gray-500">Patient RX:</span>
-                <p className="text-gray-900 whitespace-pre-wrap">{order.patient_rx || 'N/A'}</p>
               </div>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div>

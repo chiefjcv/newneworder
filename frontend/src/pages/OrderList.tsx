@@ -224,11 +224,6 @@ const OrderList = () => {
                         <div className="font-medium text-gray-900">
                           {order.patient_name}
                         </div>
-                        {order.patient_rx && (
-                          <div className="text-xs text-gray-500 truncate max-w-xs">
-                            RX: {order.patient_rx}
-                          </div>
-                        )}
                       </td>
                       <td className="px-4 py-2 whitespace-nowrap text-gray-700">
                         {order.order_type ?? 'Stock'}

@@ -46,11 +46,6 @@ const OrderCard = ({ order, isDueSoon, onStatusChange, onDelete, onClick }: Orde
           <span className="font-medium">Created:</span>{' '}
           {format(new Date(order.date_created), 'MMM dd, yyyy')}
         </p>
-        {order.patient_rx && (
-          <p className="text-xs text-gray-500 truncate">
-            RX: {order.patient_rx}
-          </p>
-        )}
       </div>
       <div className="flex gap-2" onClick={handleStatusClick}>
         <select

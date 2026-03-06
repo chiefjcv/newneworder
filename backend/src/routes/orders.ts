@@ -93,7 +93,6 @@ router.post('/', async (req: AuthRequest, res) => {
   try {
     const { 
       patient_name, 
-      patient_rx, 
       due_date, 
       status, 
       order_type,
@@ -119,15 +118,14 @@ router.post('/', async (req: AuthRequest, res) => {
 
     const result = await dbRun(
       `INSERT INTO orders (
-        patient_name, patient_rx, due_date, status, order_type, created_by,
+        patient_name, due_date, status, order_type, created_by,
         sph_od, cyl_od, axis_od, add_od, va_od, prism_bases_od,
         sph_os, cyl_os, axis_os, add_os, va_os, prism_bases_os
        )
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)
        RETURNING id`,
       [
         patient_name, 
-        patient_rx || '', 
         due_date, 
         status || 'Open', 
         type, 
@@ -167,7 +165,6 @@ router.put('/:id', async (req: AuthRequest, res) => {
   try {
     const { 
       patient_name, 
-      patient_rx, 
       due_date, 
       status, 
       order_type,
@@ -200,13 +197,12 @@ router.put('/:id', async (req: AuthRequest, res) => {
     // Update order
     await dbRun(
       `UPDATE orders 
-       SET patient_name = $1, patient_rx = $2, due_date = $3, status = $4, order_type = $5,
-           sph_od = $7, cyl_od = $8, axis_od = $9, add_od = $10, va_od = $11, prism_bases_od = $12,
-           sph_os = $13, cyl_os = $14, axis_os = $15, add_os = $16, va_os = $17, prism_bases_os = $18
-       WHERE id = $6`,
+       SET patient_name = $1, due_date = $2, status = $3, order_type = $4,
+           sph_od = $6, cyl_od = $7, axis_od = $8, add_od = $9, va_od = $10, prism_bases_od = $11,
+           sph_os = $12, cyl_os = $13, axis_os = $14, add_os = $15, va_os = $16, prism_bases_os = $17
+       WHERE id = $5`,
       [
         patient_name || currentOrder.patient_name,
-        patient_rx !== undefined ? patient_rx : currentOrder.patient_rx,
         due_date || currentOrder.due_date,
         status !== undefined ? status : currentOrder.status,
         newOrderType,
