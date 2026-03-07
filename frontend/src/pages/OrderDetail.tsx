@@ -345,7 +345,7 @@ const OrderDetail = () => {
               <div>
                 <span className="text-sm font-medium text-gray-500">Date Created:</span>
                 <p className="text-gray-900">
-                  {format(new Date(order.date_created), 'MMm dd, yyyy HH:mm')}
+                  {format(new Date(order.date_created), 'MMM dd, yyyy HH:mm')}
                 </p>
               </div>
 
