@@ -51,7 +51,7 @@ const OrderCard = ({ order, isDueSoon, onStatusChange, onDelete, onClick }: Orde
         <select
           value={order.status}
           onChange={(e) => onStatusChange(order.id, e.target.value)}
-          className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+          className="flex-1 text-xs border border-gray-300 rounded px-2 py-1 focus:outline-none focus:ring-1 focus:ring-red-500"
           onClick={(e) => e.stopPropagation()}
         >
           <option value="Open">Open</option>

@@ -120,13 +120,13 @@ const KanbanBoard = () => {
               <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
               <button
                 onClick={() => navigate('/orders')}
-                className="text-sm text-indigo-600 hover:text-indigo-800 border border-indigo-200 px-3 py-1 rounded-md"
+                className="text-sm text-red-600 hover:text-red-800 border border-red-200 px-3 py-1 rounded-md"
               >
                 List View
               </button>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors"
+                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors"
               >
                 + New Order
               </button>

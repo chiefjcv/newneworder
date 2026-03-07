@@ -153,7 +153,7 @@ const OrderDetail = () => {
           <div className="flex justify-between items-center">
             <button
               onClick={() => navigate('/')}
-              className="text-indigo-600 hover:text-indigo-800 font-medium"
+              className="text-red-600 hover:text-red-800 font-medium"
             >
               ← Back to Board
             </button>
@@ -179,7 +179,7 @@ const OrderDetail = () => {
                   </button>
                   <button
                     onClick={() => setEditing(true)}
-                    className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 text-sm font-medium transition-colors"
+                    className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 text-sm font-medium transition-colors"
                   >
                     Edit
                   </button>
@@ -199,7 +199,7 @@ const OrderDetail = () => {
                   type="text"
                   value={formData.patient_name}
                   onChange={(e) => setFormData({ ...formData, patient_name: e.target.value })}
-                  className="w-full px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-2 py-1 text-xs border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   required
                 />
               </div>
@@ -210,7 +210,7 @@ const OrderDetail = () => {
                 <select
                   value={formData.order_type}
                   onChange={(e) => setFormData({ ...formData, order_type: e.target.value })}
-                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                  className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                 >
                   <option value="Stock">Stock</option>
                   <option value="Purchase">Purchase</option>
@@ -226,7 +226,7 @@ const OrderDetail = () => {
                     type="date"
                     value={formData.due_date}
                     onChange={(e) => setFormData({ ...formData, due_date: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                     required
                   />
                 </div>
@@ -237,7 +237,7 @@ const OrderDetail = () => {
                   <select
                     value={formData.status}
                     onChange={(e) => setFormData({ ...formData, status: e.target.value })}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
                   >
                     <option value="Open">Open</option>
                     <option value="Order Placed">Order Placed</option>
@@ -265,21 +265,21 @@ const OrderDetail = () => {
                   <tbody>
                     <tr>
                       <td className="border border-gray-300 px-2 py-1 font-semibold bg-gray-50">OD</td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_od ?? ''} onChange={(e) => setFormData({ ...formData, sph_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_od ?? ''} onChange={(e) => setFormData({ ...formData, cyl_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_od ?? ''} onChange={(e) => setFormData({ ...formData, axis_od: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_od ?? ''} onChange={(e) => setFormData({ ...formData, add_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_od} onChange={(e) => setFormData({ ...formData, va_od: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_od} onChange={(e) => setFormData({ ...formData, prism_bases_od: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_od ?? ''} onChange={(e) => setFormData({ ...formData, sph_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_od ?? ''} onChange={(e) => setFormData({ ...formData, cyl_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_od ?? ''} onChange={(e) => setFormData({ ...formData, axis_od: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_od ?? ''} onChange={(e) => setFormData({ ...formData, add_od: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_od} onChange={(e) => setFormData({ ...formData, va_od: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_od} onChange={(e) => setFormData({ ...formData, prism_bases_od: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
                     </tr>
                     <tr>
                       <td className="border border-gray-300 px-2 py-1 font-semibold bg-gray-50">OS</td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_os ?? ''} onChange={(e) => setFormData({ ...formData, sph_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_os ?? ''} onChange={(e) => setFormData({ ...formData, cyl_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_os ?? ''} onChange={(e) => setFormData({ ...formData, axis_os: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_os ?? ''} onChange={(e) => setFormData({ ...formData, add_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_os} onChange={(e) => setFormData({ ...formData, va_os: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
-                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_os} onChange={(e) => setFormData({ ...formData, prism_bases_os: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-indigo-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.sph_os ?? ''} onChange={(e) => setFormData({ ...formData, sph_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.cyl_os ?? ''} onChange={(e) => setFormData({ ...formData, cyl_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" min="0" max="180" value={formData.axis_os ?? ''} onChange={(e) => setFormData({ ...formData, axis_os: e.target.value ? parseInt(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="number" step="0.01" value={formData.add_os ?? ''} onChange={(e) => setFormData({ ...formData, add_os: e.target.value ? parseFloat(e.target.value) : null })} className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.va_os} onChange={(e) => setFormData({ ...formData, va_os: e.target.value })} placeholder="6/12" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
+                      <td className="border border-gray-300 px-1 py-0"><input type="text" value={formData.prism_bases_os} onChange={(e) => setFormData({ ...formData, prism_bases_os: e.target.value })} placeholder="6/12, N8" className="w-full px-1 py-0 border border-gray-300 rounded text-xs focus:outline-none focus:ring-2 focus:ring-red-500" /></td>
                     </tr>
                   </tbody>
                 </table>
@@ -287,7 +287,7 @@ const OrderDetail = () => {
               <div className="flex gap-3 pt-4">
                 <button
                   type="submit"
-                  className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700"
+                  className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700"
                 >
                   Save
                 </button>
@@ -399,12 +399,12 @@ const OrderDetail = () => {
                 onChange={(e) => setComment(e.target.value)}
                 placeholder="Add a comment..."
                 rows={3}
-                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 mb-2"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500 mb-2"
               />
               <button
                 type="submit"
                 disabled={submittingComment || !comment.trim()}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 Add Comment
               </button>

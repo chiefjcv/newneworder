@@ -93,7 +93,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               value={patientName}
               onChange={(e) => setPatientName(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
           </div>
 
@@ -105,7 +105,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               id="orderType"
               value={orderType}
               onChange={(e) => setOrderType(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             >
               {ORDER_TYPES.map((t) => (
                 <option key={t} value={t}>{t}</option>
@@ -123,7 +123,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
           </div>
 
@@ -135,7 +135,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               id="status"
               value={status}
               onChange={(e) => setStatus(e.target.value)}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             >
               <option value="Open">Open</option>
               <option value="Order Placed">Order Placed</option>
@@ -162,21 +162,21 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               <tbody>
                 <tr>
                   <td className="border border-gray-300 px-3 py-2 font-semibold bg-gray-50">OD</td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOd} onChange={(e) => setSphOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOd} onChange={(e) => setCylOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOd} onChange={(e) => setAxisOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOd} onChange={(e) => setAddOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOd} onChange={(e) => setVaOd(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOd} onChange={(e) => setPrismBasesOd(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOd} onChange={(e) => setSphOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOd} onChange={(e) => setCylOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOd} onChange={(e) => setAxisOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOd} onChange={(e) => setAddOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOd} onChange={(e) => setVaOd(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOd} onChange={(e) => setPrismBasesOd(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
                 </tr>
                 <tr>
                   <td className="border border-gray-300 px-3 py-2 font-semibold bg-gray-50">OS</td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOs} onChange={(e) => setSphOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOs} onChange={(e) => setCylOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOs} onChange={(e) => setAxisOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOs} onChange={(e) => setAddOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOs} onChange={(e) => setVaOs(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOs} onChange={(e) => setPrismBasesOs(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-indigo-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOs} onChange={(e) => setSphOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOs} onChange={(e) => setCylOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOs} onChange={(e) => setAxisOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOs} onChange={(e) => setAddOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOs} onChange={(e) => setVaOs(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOs} onChange={(e) => setPrismBasesOs(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
                 </tr>
               </tbody>
             </table>
@@ -193,7 +193,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
             <button
               type="submit"
               disabled={loading}
-              className="flex-1 bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="flex-1 bg-red-600 text-white py-2 px-4 rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               {loading ? 'Creating...' : 'Create Order'}
             </button>

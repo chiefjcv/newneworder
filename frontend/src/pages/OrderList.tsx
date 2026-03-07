@@ -87,13 +87,13 @@ const OrderList = () => {
               <span className="text-sm text-gray-600">Welcome, {user?.name}</span>
               <button
                 onClick={() => navigate('/')}
-                className="text-sm text-indigo-600 hover:text-indigo-800 border border-indigo-200 px-3 py-1 rounded-md"
+                className="text-sm text-red-600 hover:text-red-800 border border-red-200 px-3 py-1 rounded-md"
               >
                 Kanban View
               </button>
               <button
                 onClick={() => setShowCreateModal(true)}
-                className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition-colors"
+                className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors"
               >
                 + New Order
               </button>
@@ -118,7 +118,7 @@ const OrderList = () => {
               type="text"
               value={nameFilter}
               onChange={(e) => setNameFilter(e.target.value)}
-              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               placeholder="Search by name"
             />
           </div>
@@ -129,7 +129,7 @@ const OrderList = () => {
             <select
               value={typeFilter}
               onChange={(e) => setTypeFilter(e.target.value)}
-              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="All">All</option>
               {ORDER_TYPES.map((t) => (
@@ -146,7 +146,7 @@ const OrderList = () => {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
-              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
             >
               <option value="All">All</option>
               {STATUSES.map((s) => (
@@ -165,7 +165,7 @@ const OrderList = () => {
                 type="date"
                 value={dueFrom}
                 onChange={(e) => setDueFrom(e.target.value)}
-                className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
             <div>
@@ -176,7 +176,7 @@ const OrderList = () => {
                 type="date"
                 value={dueTo}
                 onChange={(e) => setDueTo(e.target.value)}
-                className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full px-2 py-1 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-red-500"
               />
             </div>
           </div>
@@ -249,7 +249,7 @@ const OrderList = () => {
                             e.stopPropagation();
                             navigate(`/order/${order.id}`);
                           }}
-                          className="text-indigo-600 hover:text-indigo-800 text-xs font-medium"
+                          className="text-red-600 hover:text-red-800 text-xs font-medium"
                         >
                           View
                         </button>
