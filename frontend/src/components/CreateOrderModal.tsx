@@ -65,7 +65,7 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-      <div className="bg-white rounded-lg shadow-xl max-w-md w-full p-6 max-h-[90vh] overflow-y-auto">
+      <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full p-6 max-h-[90vh] overflow-y-auto">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold text-gray-900">Create New Order</h2>
           <button
@@ -147,36 +147,36 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
 
           <div className="border-t border-gray-300 pt-4">
             <h3 className="text-lg font-semibold text-gray-900 mb-4">Prescription</h3>
-            <table className="w-full border-collapse border border-gray-300">
+            <table className="w-full border-collapse border border-gray-300 text-sm">
               <thead className="bg-gray-100">
                 <tr>
-                  <th className="border border-gray-300 px-3 py-2 text-left text-sm font-semibold">Eye</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">Sph</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">Cyl</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">Axis</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">Add.</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">VA</th>
-                  <th className="border border-gray-300 px-3 py-2 text-center text-sm font-semibold">Prism. Bases</th>
+                  <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Eye</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Sph</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Cyl</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Axis</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Add.</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">VA</th>
+                  <th className="border border-gray-300 px-4 py-2 text-center font-semibold">Prism. Bases</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td className="border border-gray-300 px-3 py-2 font-semibold bg-gray-50">OD</td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOd} onChange={(e) => setSphOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOd} onChange={(e) => setCylOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOd} onChange={(e) => setAxisOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOd} onChange={(e) => setAddOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOd} onChange={(e) => setVaOd(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOd} onChange={(e) => setPrismBasesOd(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-4 py-2 font-semibold bg-gray-50">OD</td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={sphOd} onChange={(e) => setSphOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={cylOd} onChange={(e) => setCylOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" min="0" max="180" value={axisOd} onChange={(e) => setAxisOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={addOd} onChange={(e) => setAddOd(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="text" value={vaOd} onChange={(e) => setVaOd(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="text" value={prismBasesOd} onChange={(e) => setPrismBasesOd(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
                 </tr>
                 <tr>
-                  <td className="border border-gray-300 px-3 py-2 font-semibold bg-gray-50">OS</td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={sphOs} onChange={(e) => setSphOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={cylOs} onChange={(e) => setCylOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" min="0" max="180" value={axisOs} onChange={(e) => setAxisOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="number" step="0.01" value={addOs} onChange={(e) => setAddOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={vaOs} onChange={(e) => setVaOs(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
-                  <td className="border border-gray-300 px-1.5 py-1"><input type="text" value={prismBasesOs} onChange={(e) => setPrismBasesOs(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-xs focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-4 py-2 font-semibold bg-gray-50">OS</td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={sphOs} onChange={(e) => setSphOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={cylOs} onChange={(e) => setCylOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" min="0" max="180" value={axisOs} onChange={(e) => setAxisOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="number" step="0.01" value={addOs} onChange={(e) => setAddOs(e.target.value)} className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="text" value={vaOs} onChange={(e) => setVaOs(e.target.value)} placeholder="6/12" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
+                  <td className="border border-gray-300 px-3 py-2"><input type="text" value={prismBasesOs} onChange={(e) => setPrismBasesOs(e.target.value)} placeholder="6/12, N8" className="w-full px-2 py-1 border border-gray-300 rounded text-sm focus:outline-none focus:ring-1 focus:ring-red-500" /></td>
                 </tr>
               </tbody>
             </table>
