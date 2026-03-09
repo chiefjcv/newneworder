@@ -12,6 +12,9 @@ interface AuthContextType {
   token: string | null;
   login: (email: string, password: string) => Promise<void>;
   register: (email: string, password: string, name: string) => Promise<void>;
+  forgotPassword: (email: string) => Promise<void>;
+  resetPassword: (token: string, password: string) => Promise<void>;
+  changePassword: (currentPassword: string, newPassword: string) => Promise<void>;
   logout: () => void;
   loading: boolean;
 }
@@ -77,8 +80,20 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     delete axios.defaults.headers.common['Authorization'];
   };
 
+  const forgotPassword = async (email: string) => {
+    await axios.post('/api/auth/forgot-password', { email });
+  };
+
+  const resetPassword = async (token: string, password: string) => {
+    await axios.post('/api/auth/reset-password', { token, password });
+  };
+
+  const changePassword = async (currentPassword: string, newPassword: string) => {
+    await axios.post('/api/auth/change-password', { currentPassword, newPassword });
+  };
+
   return (
-    <AuthContext.Provider value={{ user, token, login, register, logout, loading }}>
+    <AuthContext.Provider value={{ user, token, login, register, forgotPassword, resetPassword, changePassword, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

@@ -47,6 +47,8 @@ export const initDatabase = async () => {
       email TEXT UNIQUE NOT NULL,
       password TEXT NOT NULL,
       name TEXT NOT NULL,
+      reset_token TEXT,
+      reset_token_expires_at TIMESTAMPTZ,
       created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
     );
 
@@ -92,6 +94,11 @@ export const initDatabase = async () => {
       ALTER TABLE orders ADD COLUMN add_os NUMERIC;
       ALTER TABLE orders ADD COLUMN va_os TEXT;
       ALTER TABLE orders ADD COLUMN prism_bases_os TEXT;
+    EXCEPTION WHEN duplicate_column THEN NULL; END $$;
+
+    DO $$ BEGIN
+      ALTER TABLE users ADD COLUMN reset_token TEXT;
+      ALTER TABLE users ADD COLUMN reset_token_expires_at TIMESTAMPTZ;
     EXCEPTION WHEN duplicate_column THEN NULL; END $$;
 
     CREATE TABLE IF NOT EXISTS comments (

@@ -131,6 +131,12 @@ const KanbanBoard = () => {
                 + New Order
               </button>
               <button
+                onClick={() => navigate('/change-password')}
+                className="text-sm text-blue-600 hover:text-blue-800"
+              >
+                Change Password
+              </button>
+              <button
                 onClick={logout}
                 className="text-gray-600 hover:text-gray-800 text-sm"
               >

@@ -1,7 +1,9 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import { dbGet, dbRun } from '../database.js';
+import { authenticateToken } from '../middleware/auth.js';
 
 const router = express.Router();
 
@@ -90,6 +92,120 @@ router.post('/login', async (req, res) => {
     });
   } catch (error: any) {
     console.error('Login error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Forgot Password - Request reset token
+router.post('/forgot-password', async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({ error: 'Email is required' });
+    }
+
+    // Find user
+    const user = await dbGet('SELECT * FROM users WHERE email = $1', [email]);
+    if (!user) {
+      // Don't reveal if email exists (security best practice)
+      return res.status(200).json({ message: 'If email exists, reset link sent' });
+    }
+
+    // Generate reset token (valid for 1 hour)
+    const resetToken = crypto.randomBytes(32).toString('hex');
+    const resetTokenExpires = new Date(Date.now() + 3600000); // 1 hour
+
+    // Store reset token
+    await dbRun(
+      'UPDATE users SET reset_token = $1, reset_token_expires_at = $2 WHERE id = $3',
+      [resetToken, resetTokenExpires, user.id]
+    );
+
+    // In a real app, you'd send an email here with the reset link
+    // For now, we'll return the token (in production, send via email only)
+    console.log(`Reset token for ${email}: ${resetToken}`);
+
+    res.status(200).json({
+      message: 'If email exists, reset link sent',
+      // Only return in development
+      ...(process.env.NODE_ENV === 'development' && { resetToken })
+    });
+  } catch (error: any) {
+    console.error('Forgot password error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Reset Password - Validate token and set new password
+router.post('/reset-password', async (req, res) => {
+  try {
+    const { token, password } = req.body;
+
+    if (!token || !password) {
+      return res.status(400).json({ error: 'Token and password are required' });
+    }
+
+    // Find user with valid reset token
+    const user = await dbGet(
+      'SELECT * FROM users WHERE reset_token = $1 AND reset_token_expires_at > NOW()',
+      [token]
+    );
+
+    if (!user) {
+      return res.status(400).json({ error: 'Invalid or expired reset token' });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    // Update password and clear reset token
+    await dbRun(
+      'UPDATE users SET password = $1, reset_token = NULL, reset_token_expires_at = NULL WHERE id = $2',
+      [hashedPassword, user.id]
+    );
+
+    res.status(200).json({ message: 'Password reset successfully' });
+  } catch (error: any) {
+    console.error('Reset password error:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+});
+
+// Change Password - For authenticated users
+router.post('/change-password', authenticateToken, async (req, res) => {
+  try {
+    const { currentPassword, newPassword } = req.body;
+    const userId = (req as any).userId;
+
+    if (!currentPassword || !newPassword) {
+      return res.status(400).json({ error: 'Current and new password are required' });
+    }
+
+    // Find user
+    const user = await dbGet('SELECT * FROM users WHERE id = $1', [userId]);
+    if (!user) {
+      return res.status(401).json({ error: 'User not found' });
+    }
+
+    // Verify current password
+    const validPassword = await bcrypt.compare(currentPassword, user.password);
+    if (!validPassword) {
+      return res.status(401).json({ error: 'Current password is incorrect' });
+    }
+
+    // Hash new password
+    const hashedPassword = await bcrypt.hash(newPassword, 10);
+
+    // Update password
+    await dbRun(
+      'UPDATE users SET password = $1 WHERE id = $2',
+      [hashedPassword, userId]
+    );
+
+    res.status(200).json({ message: 'Password changed successfully' });
+  } catch (error: any) {
+    console.error('Change password error:', error);
     res.status(500).json({ error: 'Internal server error' });
   }
 });
