@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken';
 import crypto from 'crypto';
 import { dbGet, dbRun } from '../database.js';
 import { authenticateToken } from '../middleware/auth.js';
+import { sendPasswordResetEmail } from '../email.js';
 
 const router = express.Router();
 
@@ -122,14 +123,11 @@ router.post('/forgot-password', async (req, res) => {
       [resetToken, resetTokenExpires, user.id]
     );
 
-    // In a real app, you'd send an email here with the reset link
-    // For now, we'll return the token (in production, send via email only)
-    console.log(`Reset token for ${email}: ${resetToken}`);
+    // Send reset email
+    await sendPasswordResetEmail(email, resetToken);
 
     res.status(200).json({
-      message: 'If email exists, reset link sent',
-      // Only return in development
-      ...(process.env.NODE_ENV === 'development' && { resetToken })
+      message: 'If email exists, reset link sent'
     });
   } catch (error: any) {
     console.error('Forgot password error:', error);
