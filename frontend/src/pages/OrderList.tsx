@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { format } from 'date-fns';
+import * as XLSX from 'xlsx';
 import { useAuth } from '../contexts/AuthContext';
 import { Order, ORDER_TYPES, STATUSES } from './KanbanBoard';
 import CreateOrderModal from '../components/CreateOrderModal';
@@ -69,6 +70,30 @@ const OrderList = () => {
     });
   }, [orders, nameFilter, statusFilter, typeFilter, dueFrom, dueTo]);
 
+  const handleExportFiltered = () => {
+    const rows = filteredOrders.map((order) => ({
+      RefNo: order.patient_name ?? '',
+      'RE SPH': order.sph_od ?? '',
+      'RE CYL': order.cyl_od ?? '',
+      'RE Axis': order.axis_od ?? '',
+      'RE Add': order.add_od ?? '',
+      'LE SPH': order.sph_os ?? '',
+      'LE CYL': order.cyl_os ?? '',
+      'LE Axis': order.axis_os ?? '',
+      'LE Add': order.add_os ?? '',
+      Product: order.lens_type ?? ''
+    }));
+
+    const worksheet = XLSX.utils.json_to_sheet(rows, {
+      header: ['RefNo', 'RE SPH', 'RE CYL', 'RE Axis', 'RE Add', 'LE SPH', 'LE CYL', 'LE Axis', 'LE Add', 'Product']
+    });
+    const workbook = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Orders');
+
+    const now = format(new Date(), 'yyyyMMdd-HHmm');
+    XLSX.writeFile(workbook, `filtered-orders-${now}.xlsx`);
+  };
+
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
@@ -109,6 +134,18 @@ const OrderList = () => {
       </header>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-4">
+        <div className="flex justify-between items-center">
+          <p className="text-sm text-gray-600">
+            Showing {filteredOrders.length} filtered order{filteredOrders.length === 1 ? '' : 's'}
+          </p>
+          <button
+            onClick={handleExportFiltered}
+            className="bg-red-600 text-white px-4 py-2 rounded-md hover:bg-red-700 transition-colors text-sm"
+          >
+            Export Excel
+          </button>
+        </div>
+
         <div className="bg-white rounded-lg shadow-md p-4 grid grid-cols-1 md:grid-cols-4 gap-4">
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">
