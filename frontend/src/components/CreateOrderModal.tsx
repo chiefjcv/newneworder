@@ -12,6 +12,8 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
   const [dueDate, setDueDate] = useState('');
   const [status, setStatus] = useState('Open');
   const [orderType, setOrderType] = useState('Stock');
+  const [lensType, setLensType] = useState('');
+  const [frame, setFrame] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   
@@ -42,6 +44,8 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
         due_date: dueDate,
         status,
         order_type: orderType,
+        lens_type: lensType || null,
+        frame: frame || null,
         sph_od: sphOd ? parseFloat(sphOd) : null,
         cyl_od: cylOd ? parseFloat(cylOd) : null,
         axis_od: axisOd ? parseInt(axisOd) : null,
@@ -123,6 +127,32 @@ const CreateOrderModal = ({ onClose, onSuccess }: CreateOrderModalProps) => {
               value={dueDate}
               onChange={(e) => setDueDate(e.target.value)}
               required
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="lensType" className="block text-sm font-medium text-gray-700 mb-1">
+              Lens Type
+            </label>
+            <input
+              id="lensType"
+              type="text"
+              value={lensType}
+              onChange={(e) => setLensType(e.target.value)}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="frame" className="block text-sm font-medium text-gray-700 mb-1">
+              Frame
+            </label>
+            <input
+              id="frame"
+              type="text"
+              value={frame}
+              onChange={(e) => setFrame(e.target.value)}
               className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500"
             />
           </div>

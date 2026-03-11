@@ -46,11 +46,12 @@ const OrderCard = ({ order, isDueSoon, onStatusChange, onDelete, onClick }: Orde
           <span className="font-medium">Created:</span>{' '}
           {format(new Date(order.date_created), 'MMM dd, yyyy')}
         </p>
-        {order.lens_type && (
-          <p>
-            <span className="font-medium">Lens Type:</span> {order.lens_type}
-          </p>
-        )}
+        <p>
+          <span className="font-medium">Lens Type:</span> {order.lens_type || '—'}
+        </p>
+        <p>
+          <span className="font-medium">Frame:</span> {order.frame || '—'}
+        </p>
       </div>
       <div className="flex gap-2" onClick={handleStatusClick}>
         <select

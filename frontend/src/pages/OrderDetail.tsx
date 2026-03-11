@@ -37,6 +37,8 @@ const OrderDetail = () => {
     due_date: '',
     status: 'Open',
     order_type: 'Stock',
+    lens_type: '' as string,
+    frame: '' as string,
     sph_od: null as number | null,
     cyl_od: null as number | null,
     axis_od: null as number | null,
@@ -64,6 +66,8 @@ const OrderDetail = () => {
         due_date: response.data.due_date.split('T')[0],
         status: response.data.status,
         order_type: response.data.order_type ?? 'Stock',
+        lens_type: response.data.lens_type ?? '',
+        frame: response.data.frame ?? '',
         sph_od: response.data.sph_od ?? null,
         cyl_od: response.data.cyl_od ?? null,
         axis_od: response.data.axis_od ?? null,
@@ -247,6 +251,30 @@ const OrderDetail = () => {
                   </select>
                 </div>
               </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Lens Type
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.lens_type}
+                    onChange={(e) => setFormData({ ...formData, lens_type: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                    Frame
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.frame}
+                    onChange={(e) => setFormData({ ...formData, frame: e.target.value })}
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-red-500"
+                  />
+                </div>
+              </div>
 
               <div className="border-t border-gray-300 pt-1">
                 <h3 className="text-sm font-semibold text-gray-900 mb-1">Prescription</h3>
@@ -300,6 +328,8 @@ const OrderDetail = () => {
                       due_date: order.due_date.split('T')[0],
                       status: order.status,
                       order_type: order.order_type ?? 'Stock',
+                      lens_type: order.lens_type ?? '',
+                      frame: order.frame ?? '',
                       sph_od: order.sph_od ?? null,
                       cyl_od: order.cyl_od ?? null,
                       axis_od: order.axis_od ?? null,
@@ -334,6 +364,14 @@ const OrderDetail = () => {
                 <div>
                   <span className="text-sm font-medium text-gray-500">Status:</span>
                   <p className="text-lg text-gray-900">{order.status}</p>
+                </div>
+                <div>
+                  <span className="text-sm font-medium text-gray-500">Lens Type:</span>
+                  <p className="text-lg text-gray-900">{order.lens_type || '—'}</p>
+                </div>
+                <div>
+                  <span className="text-sm font-medium text-gray-500">Frame:</span>
+                  <p className="text-lg text-gray-900">{order.frame || '—'}</p>
                 </div>
                 <div>
                   <span className="text-sm font-medium text-gray-500">Due Date:</span>

@@ -107,7 +107,9 @@ router.post('/', async (req: AuthRequest, res) => {
       axis_os,
       add_os,
       va_os,
-      prism_bases_os
+      prism_bases_os,
+      lens_type,
+      frame
     } = req.body;
     
     const type = order_type && ORDER_TYPES.includes(order_type) ? order_type : 'Stock';
@@ -120,9 +122,10 @@ router.post('/', async (req: AuthRequest, res) => {
       `INSERT INTO orders (
         patient_name, due_date, status, order_type, created_by,
         sph_od, cyl_od, axis_od, add_od, va_od, prism_bases_od,
-        sph_os, cyl_os, axis_os, add_os, va_os, prism_bases_os
+        sph_os, cyl_os, axis_os, add_os, va_os, prism_bases_os,
+        lens_type, frame
        )
-       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16, $17, $18, $19)
        RETURNING id`,
       [
         patient_name, 
@@ -141,7 +144,9 @@ router.post('/', async (req: AuthRequest, res) => {
         axis_os || null,
         add_os || null,
         va_os || null,
-        prism_bases_os || null
+        prism_bases_os || null,
+        lens_type || null,
+        frame || null
       ]
     );
 
@@ -179,7 +184,9 @@ router.put('/:id', async (req: AuthRequest, res) => {
       axis_os,
       add_os,
       va_os,
-      prism_bases_os
+      prism_bases_os,
+      lens_type,
+      frame
     } = req.body;
     const orderId = req.params.id;
 
@@ -199,7 +206,8 @@ router.put('/:id', async (req: AuthRequest, res) => {
       `UPDATE orders 
        SET patient_name = $1, due_date = $2, status = $3, order_type = $4,
            sph_od = $6, cyl_od = $7, axis_od = $8, add_od = $9, va_od = $10, prism_bases_od = $11,
-           sph_os = $12, cyl_os = $13, axis_os = $14, add_os = $15, va_os = $16, prism_bases_os = $17
+           sph_os = $12, cyl_os = $13, axis_os = $14, add_os = $15, va_os = $16, prism_bases_os = $17,
+           lens_type = $18, frame = $19
        WHERE id = $5`,
       [
         patient_name || currentOrder.patient_name,
@@ -218,7 +226,9 @@ router.put('/:id', async (req: AuthRequest, res) => {
         axis_os !== undefined ? axis_os : currentOrder.axis_os,
         add_os !== undefined ? add_os : currentOrder.add_os,
         va_os !== undefined ? va_os : currentOrder.va_os,
-        prism_bases_os !== undefined ? prism_bases_os : currentOrder.prism_bases_os
+        prism_bases_os !== undefined ? prism_bases_os : currentOrder.prism_bases_os,
+        lens_type !== undefined ? lens_type : currentOrder.lens_type,
+        frame !== undefined ? frame : currentOrder.frame
       ]
     );
 
@@ -252,6 +262,22 @@ router.put('/:id', async (req: AuthRequest, res) => {
         `INSERT INTO order_history (order_id, user_id, field_name, old_value, new_value)
          VALUES ($1, $2, $3, $4, $5)`,
         [orderId, req.userId, 'order_type', currentOrder.order_type ?? 'Stock', newOrderType]
+      );
+    }
+
+    if (lens_type !== undefined && lens_type !== currentOrder.lens_type) {
+      await dbRun(
+        `INSERT INTO order_history (order_id, user_id, field_name, old_value, new_value)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [orderId, req.userId, 'lens_type', currentOrder.lens_type, lens_type]
+      );
+    }
+
+    if (frame !== undefined && frame !== currentOrder.frame) {
+      await dbRun(
+        `INSERT INTO order_history (order_id, user_id, field_name, old_value, new_value)
+         VALUES ($1, $2, $3, $4, $5)`,
+        [orderId, req.userId, 'frame', currentOrder.frame, frame]
       );
     }
 
