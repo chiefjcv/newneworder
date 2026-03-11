@@ -2,7 +2,6 @@ import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
 import { initDatabase } from './database.js';
-import { initEmailService } from './email.js';
 import authRoutes from './routes/auth.js';
 import orderRoutes from './routes/orders.js';
 import { authenticateToken } from './middleware/auth.js';
@@ -26,9 +25,6 @@ app.get('/api/health', (req, res) => {
 const start = async () => {
   // Initialize database (Supabase/Postgres)
   await initDatabase();
-  
-  // Initialize email service
-  initEmailService();
 
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);

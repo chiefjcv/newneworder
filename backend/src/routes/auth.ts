@@ -1,10 +1,8 @@
 import express from 'express';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
-import crypto from 'crypto';
 import { dbGet, dbRun } from '../database.js';
 import { authenticateToken } from '../middleware/auth.js';
-import { sendPasswordResetEmail } from '../email.js';
 
 const router = express.Router();
 
@@ -106,28 +104,8 @@ router.post('/forgot-password', async (req, res) => {
       return res.status(400).json({ error: 'Email is required' });
     }
 
-    // Find user
-    const user = await dbGet('SELECT * FROM users WHERE email = $1', [email]);
-    if (!user) {
-      // Don't reveal if email exists (security best practice)
-      return res.status(200).json({ message: 'If email exists, reset link sent' });
-    }
-
-    // Generate reset token (valid for 1 hour)
-    const resetToken = crypto.randomBytes(32).toString('hex');
-    const resetTokenExpires = new Date(Date.now() + 3600000); // 1 hour
-
-    // Store reset token
-    await dbRun(
-      'UPDATE users SET reset_token = $1, reset_token_expires_at = $2 WHERE id = $3',
-      [resetToken, resetTokenExpires, user.id]
-    );
-
-    // Send reset email
-    await sendPasswordResetEmail(email, resetToken);
-
-    res.status(200).json({
-      message: 'If email exists, reset link sent'
+    return res.status(501).json({
+      error: 'Password reset email is not available'
     });
   } catch (error: any) {
     console.error('Forgot password error:', error);
