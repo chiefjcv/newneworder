@@ -71,7 +71,9 @@ export const initDatabase = async () => {
       axis_os INTEGER,
       add_os NUMERIC,
       va_os TEXT,
-      prism_bases_os TEXT
+      prism_bases_os TEXT,
+      lens_type TEXT,
+      frame TEXT
     );
   `);
 
@@ -94,6 +96,8 @@ export const initDatabase = async () => {
       ALTER TABLE orders ADD COLUMN add_os NUMERIC;
       ALTER TABLE orders ADD COLUMN va_os TEXT;
       ALTER TABLE orders ADD COLUMN prism_bases_os TEXT;
+      ALTER TABLE orders ADD COLUMN lens_type TEXT;
+      ALTER TABLE orders ADD COLUMN frame TEXT;
     EXCEPTION WHEN duplicate_column THEN NULL; END $$;
 
     DO $$ BEGIN

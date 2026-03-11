@@ -45,6 +45,8 @@ export interface Order {
   add_os?: number;
   va_os?: string;
   prism_bases_os?: string;
+  lens_type?: string;
+  frame?: string;
   comments?: OrderComment[];
   history?: OrderHistoryItem[];
 }
