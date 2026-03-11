@@ -73,6 +73,7 @@ const OrderList = () => {
   const handleExportFiltered = () => {
     const rows = filteredOrders.map((order) => ({
       RefNo: order.patient_name ?? '',
+      Category: '',
       'RE SPH': order.sph_od ?? '',
       'RE CYL': order.cyl_od ?? '',
       'RE Axis': order.axis_od ?? '',
@@ -85,7 +86,7 @@ const OrderList = () => {
     }));
 
     const worksheet = XLSX.utils.json_to_sheet(rows, {
-      header: ['RefNo', 'RE SPH', 'RE CYL', 'RE Axis', 'RE Add', 'LE SPH', 'LE CYL', 'LE Axis', 'LE Add', 'Product']
+      header: ['RefNo', 'Category', 'RE SPH', 'RE CYL', 'RE Axis', 'RE Add', 'LE SPH', 'LE CYL', 'LE Axis', 'LE Add', 'Product']
     });
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, 'Filtered Orders');
